@@ -1332,7 +1332,7 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 		if(this.im) {
 			var w = parseInt(this.ne.selectedInstance.elm.getStyle('width'));
 			this.im.setAttributes({
-				src : this.inputs['src'].value,
+				src : src,
 				alt : this.inputs['alt'].value,
 				align : this.inputs['align'].value,
 				width : w? w : ''
