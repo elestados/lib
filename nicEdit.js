@@ -1313,7 +1313,8 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 		}
 		var src = null;
 		if(this.inputs['src'].value.includes(`google`)){
-		   	src = straighteningLink(this.inputs['src'].value);
+			const link = straighteningLink(this.inputs['src'].value);
+		   	src = link;
 		   }else{
 			src = this.inputs['src'].value;
 		 }
