@@ -269,7 +269,7 @@ var nicEditorConfig = bkClass.extend({
 		'hr' : {name : __('Horizontal Rule'), command : 'insertHorizontalRule', noActive : true}
 	},
 	iconsPath : `https://elestados.github.io/lib/nicEditorIcons.gif`,
-	buttonList : ['save','bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','upload','link','unlink','forecolor','bgcolor'],
+	buttonList : ['save','bold','italic','underline','left','center','right','justify','ol','ul','fontSize','fontFamily','fontFormat','indent','outdent','image','link','unlink','forecolor','bgcolor'],
 	iconList : {"xhtml":1,"bgcolor":2,"forecolor":3,"bold":4,"center":5,"hr":6,"indent":7,"italic":8,"justify":9,"left":10,"ol":11,"outdent":12,"removeformat":13,"right":14,"save":25,"strikethrough":16,"subscript":17,"superscript":18,"ul":19,"underline":20,"image":21,"link":22,"unlink":23,"close":24,"arrow":26,"upload":27}
 	
 });
@@ -1304,7 +1304,19 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 	},
 	
 	submit : function(e) {
-		var src = this.inputs['src'].value;
+		function straighteningLink(url){
+		    let regExp =`d/(.*)/` ;
+		    let [,id] = url.match(regExp)
+		    let straighteningLink = `https://drive.google.com/uc?export=view&id=${id}`;
+		    console.log(id);
+		    return straighteningLink;
+		}
+		var src = null;
+		if(this.inputs['src'].value.includes(`google`){
+		   	src = straighteningLink(this.inputs['src'].value);
+		   }else{
+			src = this.inputs['src'].value;
+		 }
 		if(src == "" || src == "http://") {
 			alert("You must enter a Image URL to insert");
 			return false;
@@ -1317,10 +1329,12 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 			this.im = this.findElm('IMG','src',tmp);
 		}
 		if(this.im) {
+			var w = parseInt(this.ne.selectedInstance.elm.getStyle('width'));
 			this.im.setAttributes({
 				src : this.inputs['src'].value,
 				alt : this.inputs['alt'].value,
-				align : this.inputs['align'].value
+				align : this.inputs['align'].value,
+				width : (w && options.width) ? Math.min(w, options.width) : ''
 			});
 		}
 	}
@@ -1366,7 +1380,7 @@ var nicUploadOptions = {
 /* END CONFIG */
 
 var nicUploadButton = nicEditorAdvancedButton.extend({	
-	nicURI : 'https://api.imgur.com/3/image',
+	nicURI : null,//'https://api.imgur.com/3/image',
   errorText : 'Failed to upload image',
 
 	addPane : function() {
