@@ -1312,7 +1312,7 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 		    return straighteningLink;
 		}
 		var src = null;
-		if(this.inputs['src'].value.includes(`google`)){
+		if(this.inputs['src'].value.includes(`drive.google`)){
 			const link = straighteningLink(this.inputs['src'].value);
 		   	src = link;
 		   }else{
