@@ -1308,7 +1308,7 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 		    let regExp =`d/(.*)/` ;
 		    let [,id] = url.match(regExp)
 		    let straighteningLink = `https://drive.google.com/uc?export=view&id=${id}`;
-		    console.log(id);
+		    console.log(straighteningLink);
 		    return straighteningLink;
 		}
 		var src = null;
