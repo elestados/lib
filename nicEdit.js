@@ -1334,7 +1334,7 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 				src : this.inputs['src'].value,
 				alt : this.inputs['alt'].value,
 				align : this.inputs['align'].value,
-				width : (w && options.width) ? Math.min(w, options.width) : ''
+				width : w? w : ''
 			});
 		}
 	}
