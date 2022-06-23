@@ -1328,7 +1328,6 @@ var nicImageButton = nicEditorAdvancedButton.extend({
 			var tmp = 'javascript:nicImTemp();';
 			this.ne.nicCommand("insertImage",tmp);
 			this.im = this.findElm('IMG','src',tmp);
-			const br = new bkElement('BR').appendTo(this.im);
 		}
 		if(this.im) {
 			var w = parseInt(this.ne.selectedInstance.elm.getStyle('width'));
